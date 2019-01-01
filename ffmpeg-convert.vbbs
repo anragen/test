@@ -28,12 +28,13 @@ END IF
 
 For Each File In Folder.Files
     If Right(File.name, 4) = ".mp4" Or Right(File.name, 4) = ".MP4" Then
-         MsgBox (File.name & "    Budet skovrertirovan")
-         strFFPath = ("ffmpeg.exe -i " & fldPath & "\" & File.name  & " -b 1000000 " & strFolder & "\" & File.name)
+         MsgBox (fldPath & "\" & File.name  & "    Budet skovrertirovan")
+         strFFPath = "ffmpeg.exe -i " & Chr(34) & fldPath & "\" & File.name & Chr(34) & " -b 1000000 " & Chr(34) & strFolder & "\" & File.name & Chr(34) 
          MsgBox strFFPath
 
 Set oShell = WScript.CreateObject("WSCript.shell")
-oShell.run strFFPath
+oShell.run strFFPath, 10, True
+
 '        FSO.DeleteFile(fldPath & "\" & File.name)
     End If
 Next
