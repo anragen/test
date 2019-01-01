@@ -1,0 +1,41 @@
+Dim fldPath, FSO, File, Folder, filExt
+
+Set FSO = CreateObject("Scripting.FileSystemObject")
+fldPath = InputBox("Vvedite puti k dirrektorii", "Dirrektoriya")
+
+If Trim(fldPath) = "" Then 
+    MsgBox "Dirrekrotiya ne vvedena!!", vbOKOnly
+    WScript.Quit
+Else
+    If FSO.FolderExists(fldPath) Then
+        ' Continue program
+    Else
+        MsgBox "Dirrektoriya ne ukazana", vbOKOnly
+        WScript.Quit
+    End If
+End If
+
+Set Folder = FSO.GetFolder(fldPath)
+
+strFolder = (fldPath & "\" & "new")
+SET objFSO = CREATEOBJECT("Scripting.FileSystemObject")
+IF objFSO.FolderExists(strFolder) = FALSE THEN
+	objFSO.CreateFolder strFolder
+	wscript.echo "Dirrectoriya sozdana"
+ELSE
+	wscript.echo "Dirrectoriya uze esti"
+END IF
+
+For Each File In Folder.Files
+    If Right(File.name, 4) = ".mp4" Or Right(File.name, 4) = ".MP4" Then
+         MsgBox (File.name & "    Budet skovrertirovan")
+         strFFPath = ("ffmpeg.exe -i " & fldPath & "\" & File.name  & " -b 1000000 " & strFolder & "\" & File.name)
+         MsgBox strFFPath
+
+Set oShell = WScript.CreateObject("WSCript.shell")
+oShell.run strFFPath
+'        FSO.DeleteFile(fldPath & "\" & File.name)
+    End If
+Next
+
+MsgBox "Gotovo..."
