@@ -4,7 +4,7 @@ metadata:
   name: prometheus-grafana-datasource
   namespace: monitoring
   labels:
-    grafana_datasource: '1'
+    grafana_datasource: "1"
 data:
   datasource.yaml: |-
     apiVersion: 1
@@ -22,8 +22,8 @@ metadata:
   namespace: monitoring
   labels:
      grafana_dashboard: "1"
-  annotations:
-    k8s-sidecar-target-directory: "/tmp/dashboards/Monitor"
+  # annotations:
+  #   k8s-sidecar-target-directory: "/tmp/dashboards/Monitor"
 data:
   monitor.json: |-
     {
