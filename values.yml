@@ -1,6 +1,8 @@
 sidecar:
   image: xuxinkun/k8s-sidecar:0.0.7
   imagePullPolicy: IfNotPresent
+  dashboards:
+    enabled: true
   datasources:
     enabled: true
     label: grafana_datasource
